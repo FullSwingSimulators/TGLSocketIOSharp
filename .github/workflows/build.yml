@@ -3,9 +3,7 @@ jobs:
   build-cs:
     name: Build C# project
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cs
+
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
