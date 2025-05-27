@@ -1,0 +1,47 @@
+on:
+  release:
+    types: [published]
+jobs:
+  publish-cs:
+    name: Publish NuGet package
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+    env:
+      NUGET_FEED: https://fsg-tgl-476195902741.d.codeartifact.us-east-1.amazonaws.com/nuget/nuget-store/v3/index.json
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup protoc
+        uses: arduino/setup-protoc@v2
+      - name: Restore dependencies
+        run: dotnet restore -p:Version=${{ github.ref_name }}
+      - name: Build
+        run: dotnet build --no-restore -c Release -p:Version=${{ github.ref_name }}
+      - name: Pack
+        run: dotnet pack -c Release -p:Version=${{ github.ref_name }} -o .
+      - name: Install CodeArtifact credential helper
+        run: |
+          dotnet tool install -g AWS.CodeArtifact.NuGet.CredentialProvider
+          dotnet codeartifact-creds install
+      - name: Assume IAM role
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::476195902741:role/github-actions-nuget-build
+          aws-region: us-east-1
+      - name: Log in to the private NuGet feed
+        run: dotnet nuget add source --name fsg-tgl/nuget-store --username aws --password "$(aws codeartifact get-authorization-token --domain fsg-tgl --query authorizationToken --output text)" --store-password-in-clear-text ${NUGET_FEED}
+        shell: bash # get fast-fail behavior
+      - name: Add GitHub Package Registry NuGet Source
+        env:
+          NUGET_SOURCE: https://nuget.pkg.github.com/FullSwingSimulators/index.json
+        run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "$NUGET_SOURCE"
+      - name: Upload
+        run: dotnet nuget push Tgl.SocketIOSharp.${{ github.ref_name }}.nupkg --source ${NUGET_FEED}
+      - name: Publish NuGet To GitHub
+        run: dotnet nuget push Tgl.SocketIOSharp.${{ github.ref_name }}.nupkg --source github --api-key ${{ github.token }} --skip-duplicate --no-symbols
