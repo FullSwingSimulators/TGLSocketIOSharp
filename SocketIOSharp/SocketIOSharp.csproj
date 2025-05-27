@@ -5,24 +5,24 @@
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
     <RootNamespace>SocketIOSharp</RootNamespace>
     <AssemblyName>SocketIOSharp</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <Authors>uhm0311</Authors>
-    <Company>uhm0311</Company>
+    <!-- <FileAlignment>512</FileAlignment> -->
+    <!-- <Authors>uhm0311</Authors>
+    <Company>uhm0311</Company> -->
     <Title>Socket.IO</Title>
-    <Copyright>Copyright (c) 2016-2020 uhm0311</Copyright>
+    <!-- <Copyright>Copyright (c) 2016-2020 uhm0311</Copyright> -->
     <Description>C# implementation of Socket.IO protocol client.</Description>
-    <PackageId>SocketIOSharp</PackageId>
-    <PackageTags>Socket.IO;SocketIO</PackageTags>
-    <PackageProjectUrl>https://github.com/uhm0311/SocketIOSharp</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/uhm0311/SocketIOSharp.git</RepositoryUrl>
-    <PackageIcon>icon.png</PackageIcon>
-    <MinClientVersion>2.12</MinClientVersion>
-    <PackageVersion>2.0.3</PackageVersion>
-    <PackageReleaseNotes>Update EngineIOSharp dependency.</PackageReleaseNotes>
-    <PackageOutputPath>../nuget</PackageOutputPath>
+    <PackageId>Tgl.SocketIOSharp</PackageId>
+    <!-- <PackageTags>Socket.IO;SocketIO</PackageTags> -->
+    <!-- <PackageProjectUrl>https://github.com/uhm0311/SocketIOSharp</PackageProjectUrl> -->
+    <!-- <PackageLicenseExpression>MIT</PackageLicenseExpression> -->
+    <!-- <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance> -->
+    <!-- <RepositoryType>git</RepositoryType> -->
+    <!-- <RepositoryUrl>https://github.com/uhm0311/SocketIOSharp.git</RepositoryUrl> -->
+    <!-- <PackageIcon>icon.png</PackageIcon> -->
+    <!-- <MinClientVersion>2.12</MinClientVersion> -->
+    <!-- <PackageVersion>2.0.3</PackageVersion> -->
+    <!-- <PackageReleaseNotes>Update EngineIOSharp dependency.</PackageReleaseNotes> -->
+    <!-- <PackageOutputPath>../nuget</PackageOutputPath> -->
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
     <TargetFrameworks>net45;net40;netstandard2.0;net8.0</TargetFrameworks>
