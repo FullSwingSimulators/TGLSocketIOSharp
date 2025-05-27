@@ -42,6 +42,6 @@ jobs:
           NUGET_SOURCE: https://nuget.pkg.github.com/FullSwingSimulators/index.json
         run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "$NUGET_SOURCE"
       - name: Upload
-        run: dotnet nuget push Tgl.SocketIOSharp.${{ github.ref_name }}.nupkg --source ${NUGET_FEED}
+        run: dotnet nuget push SocketIOSharp.${{ github.ref_name }}.nupkg --source ${NUGET_FEED}
       - name: Publish NuGet To GitHub
-        run: dotnet nuget push Tgl.SocketIOSharp.${{ github.ref_name }}.nupkg --source github --api-key ${{ github.token }} --skip-duplicate --no-symbols
+        run: dotnet nuget push SocketIOSharp.${{ github.ref_name }}.nupkg --source github --api-key ${{ github.token }} --skip-duplicate --no-symbols
